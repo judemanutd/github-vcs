@@ -1,0 +1,11 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "npm.includeDirectories": ["backend"],
+    "typescript.tsdk": "backend/node_modules/typescript/lib"
+  }
+}

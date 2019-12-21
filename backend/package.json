@@ -1,0 +1,80 @@
+{
+  "name": "github-vcs",
+  "version": "0.0.1",
+  "description": "Github VCS",
+  "author": "Jude Fernandes",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start-alternate": "npx ts-node-dev --respawn --notify=false src/main.ts",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "tslint -p tsconfig.json -c tslint.json"
+  },
+  "dependencies": {
+    "@nestjs/common": "^6.10.12",
+    "@nestjs/core": "^6.10.12",
+    "@nestjs/platform-express": "^6.10.12",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "helmet": "^3.21.2",
+    "moment-timezone": "^0.5.27",
+    "reflect-metadata": "^0.1.13",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.8",
+    "rimraf": "^3.0.0",
+    "rxjs": "^6.5.3"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^6.12.9",
+    "@nestjs/schematics": "^6.7.6",
+    "@nestjs/testing": "^6.10.12",
+    "@types/body-parser": "^1.17.1",
+    "@types/cors": "^2.8.6",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.2",
+    "@types/helmet": "0.0.45",
+    "@types/moment-timezone": "^0.5.12",
+    "@types/node": "^12.12.21",
+    "@types/request": "^2.48.4",
+    "@types/request-promise-native": "^1.0.17",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1",
+    "ts-loader": "^6.2.1",
+    "ts-node": "^8.5.4",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.1.0",
+    "typescript": "^3.7.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{ts}": [
+        "npx tslint --fix",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "./public",
+      "./environment",
+      "./node_modules",
+      "./dist",
+      "./coverage"
+    ]
+  }
+}
