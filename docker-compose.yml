@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  api:
+    image: node-api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile_node
+    container_name: node-api
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    restart: "always"
+  client:
+    image: angular-client:latest
+    build:
+      context: .
+      dockerfile: Dockerfile_angular
+    container_name: angular-client
+    depends_on:
+      - api
+    links:
+      - api
+    expose:
+      - 4200
+    ports:
+      - "4200:4200"
+    restart: "always"
