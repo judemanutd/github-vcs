@@ -1,0 +1,39 @@
+<div class="dashboard-container">
+  <div class="dashboard-box">
+    <div class="container">
+      <div class="card col-md-6 mt-3 mx-auto">
+        <div class="card-body">
+          <h4 class="card-title text-center">
+            <i class="fab fa-3x fa-github"></i>
+          </h4>
+          <h3 class="text-dark text-center">Dynasty Owners Test</h3>
+          <form (ngSubmit)="submitURL()" [formGroup]="dashboardForm" novalidate>
+            <div class="form-group">
+              <label class="d-block">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="url"
+                  autocomplete="url"
+                  [placeholder]="'Github Repo URL'"
+                />
+                <span hidden translate>Github Repo URL</span>
+                <small
+                  [hidden]="dashboardForm.controls.url.valid || dashboardForm.controls.url.untouched"
+                  class="text-danger"
+                  translate
+                >
+                  URL is required
+                </small>
+              </label>
+            </div>
+            <button class="btn btn-success  w-100" type="submit" [disabled]="dashboardForm.invalid || isLoading">
+              <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+              <span translate>Submit</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
