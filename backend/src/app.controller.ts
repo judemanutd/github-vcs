@@ -1,16 +1,15 @@
-import { Controller, Get, Query, HttpException, HttpStatus } from "@nestjs/common";
+import { Controller, Get, Query, Param, HttpException, HttpStatus } from "@nestjs/common";
 import moment from "moment";
-// import { ICommitObject } from "./models/ICommitObject";
 import { GithubService } from "./services/github.service";
 
 @Controller()
 export class AppController {
   constructor(private readonly githubService: GithubService) {}
 
-  @Get("/")
-  async fetch(
-    @Query("username") username?: string,
-    @Query("repoName") repoName?: string,
+  @Get(":username/:repoName/commits")
+  async fetchCommits(
+    @Param("username") username?: string,
+    @Param("repoName") repoName?: string,
     @Query("sha") sha?: string,
     @Query("since") since?: string,
     @Query("until") until?: string,
@@ -25,11 +24,6 @@ export class AppController {
         }
 
         sinceISO = sinceTimestamp.toISOString();
-      } else {
-        // fetch history for the past 2 days if unspecified
-        sinceISO = moment()
-          .add(-2, "days")
-          .toISOString();
       }
 
       if (until) {
@@ -50,29 +44,20 @@ export class AppController {
         sinceISO,
         untilISO,
       );
-      // filter out unwanted data
-      // const parsedResponse = response.map((item: ICommitObject) => {
-      //   const {
-      //     commit: {
-      //       author,
-      //       committer,
-      //       message,
-      //       tree,
-      //       verification: { reason, verified },
-      //     },
-      //     sha: shaResponse,
-      //   } = item;
 
-      //   return {
-      //     sha: shaResponse,
-      //     commit: {
-      //       author,
-      //       committer,
-      //       message,
-      //       verification: { reason, verified },
-      //     },
-      //   };
-      // });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @Get(":username/:repoName/branches")
+  async fetchBranches(
+    @Param("username") username?: string,
+    @Param("repoName") repoName?: string,
+  ): Promise<object> {
+    try {
+      const response = await this.githubService.getBranches(username, repoName);
 
       return response;
     } catch (error) {

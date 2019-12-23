@@ -6,6 +6,9 @@ export class GithubService {
   private github_commit_url = (username: string = "judemanutd", repoName: string = "github-vcs") =>
     `https://api.github.com/repos/${username}/${repoName}/commits`;
 
+  private github_branch_url = (username: string = "judemanutd", repoName: string = "github-vcs") =>
+    `https://api.github.com/repos/${username}/${repoName}/branches`;
+
   /***
    * fetch commit history from the github api
    *
@@ -44,6 +47,30 @@ export class GithubService {
       if (until) {
         options.qs.until = until;
       }
+
+      return request(options);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  /***
+   * fetch all branches
+   *
+   * @param username - username for the repo
+   * @param repoName - repo name
+   */
+  getBranches = async (username?: string, repoName?: string) => {
+    try {
+      const options: request.Options = {
+        method: "GET",
+        uri: this.github_branch_url(username, repoName),
+        json: true,
+        headers: {
+          "User-Agent": "vcs-github",
+        },
+        qs: {},
+      };
 
       return request(options);
     } catch (error) {

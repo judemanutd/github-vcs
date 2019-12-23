@@ -2,9 +2,12 @@ export interface ICommit {
   author: ICommitUser;
   committer: ICommitUser;
   message: string;
-  tree: any;
+  tree: {
+    url: string;
+    sha: string;
+  };
   url: string;
-  comment_count: 0;
+  comment_count: number;
   verification: IVerification;
 }
 
