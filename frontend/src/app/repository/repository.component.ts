@@ -1,14 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { finalize } from 'rxjs/operators';
+import { FormBuilder } from '@angular/forms';
 
 import { GithubService } from './github.service';
-
-import { environment } from '@env/environment';
-import { Logger, I18nService, AuthenticationService, untilDestroyed } from '@app/core';
-
-const log = new Logger('Repository');
 
 @Component({
   selector: 'app-repository',

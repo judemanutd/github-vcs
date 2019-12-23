@@ -70,11 +70,17 @@
             </button>
           </ng-template>
           <ng-template ngbPanelContent>
-            <p>
-              {{ commit.commit.message }}
-            </p>
-            <a href="{{ commit.commit.tree.url }}" target="_blank" class="btn btn-success">
+            <div class="commit__messages col-12 mb-3">
+              <span style="white-space: pre-line;">
+                {{ commit.commit.message }}
+              </span>
+            </div>
+            <a href="{{ commit.commit.tree.url }}" target="_blank" class="btn btn-success mx-2">
               <span>Browse Files</span>
+            </a>
+            <a href="{{ commit.html_url }}" target="_blank" class="btn btn-dark mx-2">
+              <i class="fab fa-github"></i>
+              <span>View on Github</span>
             </a>
           </ng-template>
         </ngb-panel>
