@@ -81,6 +81,13 @@
       outline: none;
     }
   }
+
+  &__messages {
+    padding: 2rem;
+    background-color: $gray-300;
+    border-radius: 6px;
+  }
+
   &__verified {
     display: block;
   }

@@ -8,11 +8,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { environment } from '@env/environment';
 import { CoreModule } from '@app/core';
-import { SharedModule } from '@app/shared';
-import { HomeModule } from './home/home.module';
-import { ShellModule } from './shell/shell.module';
-import { AboutModule } from './about/about.module';
-import { LoginModule } from './login/login.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { RepositoryModule } from './repository/repository.module';
 import { AppComponent } from './app.component';
@@ -27,11 +22,6 @@ import { AppRoutingModule } from './app-routing.module';
     TranslateModule.forRoot(),
     NgbModule,
     CoreModule,
-    SharedModule,
-    ShellModule,
-    HomeModule,
-    AboutModule,
-    LoginModule,
     DashboardModule,
     RepositoryModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route

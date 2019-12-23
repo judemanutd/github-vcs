@@ -3,11 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 
-import { environment } from '@env/environment';
-import { Logger, I18nService, AuthenticationService, untilDestroyed } from '@app/core';
-
-const log = new Logger('Dashboard');
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -18,13 +13,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   dashboardForm!: FormGroup;
   isLoading = false;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private i18nService: I18nService,
-    private authenticationService: AuthenticationService
-  ) {
+  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
     this.createForm();
   }
 
@@ -42,22 +31,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.router.navigate([this.route.snapshot.queryParams.redirect || repo], { replaceUrl: true });
   }
 
-  setLanguage(language: string) {
-    this.i18nService.language = language;
-  }
-
-  get currentLanguage(): string {
-    return this.i18nService.language;
-  }
-
-  get languages(): string[] {
-    return this.i18nService.supportedLanguages;
-  }
-
   private createForm() {
     this.dashboardForm = this.formBuilder.group({
-      url: ['https://github.com/GlennFernandes/dynasty', Validators.required]
-      // url: ['https://github.com/judemanutd/github-vcs', Validators.required]
+      // url: ['https://github.com/GlennFernandes/dynasty', Validators.required]
+      url: ['https://github.com/judemanutd/github-vcs', Validators.required]
     });
   }
 }
