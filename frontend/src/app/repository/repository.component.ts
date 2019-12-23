@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 
 import { GithubService } from './github.service';
 
@@ -20,14 +21,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   lastDateReceived: string;
   public isMenuCollapsed = true;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private i18nService: I18nService,
-    private authenticationService: AuthenticationService,
-    private GithubService: GithubService
-  ) {
+  constructor(private router: Router, private route: ActivatedRoute, private GithubService: GithubService) {
     this.route.params.subscribe(params => {
       this.username = params.username;
       this.repo = params.repo;
@@ -66,7 +60,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((commits: any) => {
-        console.log('TCL: RepositoryComponent -> fetchCommits -> commits', commits);
+        // console.log('TCL: RepositoryComponent -> fetchCommits -> commits', commits);
 
         const length = commits.length;
         if (length > 0) {
