@@ -9,6 +9,8 @@ export class AppController {
 
   @Get("/")
   async fetch(
+    @Query("username") username?: string,
+    @Query("repoName") repoName?: string,
     @Query("sha") sha?: string,
     @Query("since") since?: string,
     @Query("until") until?: string,
@@ -41,7 +43,13 @@ export class AppController {
         untilISO = moment().toISOString();
       }
 
-      const response = await this.githubService.getCommits(sha, sinceISO, untilISO);
+      const response = await this.githubService.getCommits(
+        username,
+        repoName,
+        sha,
+        sinceISO,
+        untilISO,
+      );
       // filter out unwanted data
       const parsedResponse = response.map((item: ICommitObject) => {
         const {
