@@ -17,8 +17,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Setup logger
 
-    log.debug('init');
-
     const onNavigationEnd = this.router.events.pipe(filter(event => event instanceof NavigationEnd));
 
     // Change page title on navigation or language change, based on route data
