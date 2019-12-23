@@ -9,21 +9,34 @@
   color: $green;
 }
 
-.repository-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+::ng-deep .fas.fa-chevron-left {
+  color: $white;
 }
 
-.repository-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  min-height: 100%;
+.repository {
+  &__container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+  }
+
+  &__back-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white !important;
+  }
 }
 
 ::ng-deep .card {

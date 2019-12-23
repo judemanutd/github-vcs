@@ -22,7 +22,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   repo = '';
   commits: any[];
   branches: any[];
-  collaborators: any[];
+  selectedBranchSHA: string;
   public isMenuCollapsed = true;
 
   constructor(
@@ -40,7 +40,19 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.GithubService.getGithubRepo({ username: this.username, repo: this.repo })
+    this.selectedBranchSHA = '';
+    this.fetchCommits();
+  }
+
+  ngOnDestroy() {}
+
+  public onBranchSelected(sha: string) {
+    this.selectedBranchSHA = sha;
+    this.fetchCommits();
+  }
+
+  private fetchCommits(sha: string = '') {
+    this.GithubService.getGithubRepo({ username: this.username, repo: this.repo, sha: this.selectedBranchSHA })
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -58,20 +70,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       )
       .subscribe((branches: any) => {
         this.branches = branches;
-        console.log('TCL: RepositoryComponent -> ngOnInit -> this.branches', this.branches);
+        console.log('TCL: RepositoryComponent -> fetchCommits ->  this.branches', this.branches);
       });
-
-    // this.GithubService.getGithubCollaborators({ username: this.username, repo: this.repo })
-    // .pipe(
-    //   finalize(() => {
-    //     this.isLoading = false;
-    //   })
-    // )
-    // .subscribe((collaborators: any) => {
-    //   this.collaborators = collaborators;
-    //   console.log("TCL: RepositoryComponent -> ngOnInit -> this.collaborators", this.collaborators)
-    // });
   }
-
-  ngOnDestroy() {}
 }
