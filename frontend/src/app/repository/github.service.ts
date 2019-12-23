@@ -5,10 +5,10 @@ import { map, catchError } from 'rxjs/operators';
 
 const routes = {
   // github: (c: any) => `/jokes/random?category=${c.category}`
-  repo: (github: any):string => {
-    let request =  `https://api.github.com/repos/${github.username}/${github.repo}/commits?`;
-    if(github.sha!==''){
-      request=request+`sha=${github.sha}`;
+  repo: (github: any): string => {
+    let request = `https://api.github.com/repos/${github.username}/${github.repo}/commits?`;
+    if (github.sha !== '') {
+      request = request + `sha=${github.sha}`;
     }
     if(github.date!==''){
       request=request+`until=${github.date}`;

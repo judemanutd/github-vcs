@@ -22,9 +22,9 @@
           </span>
         </li>
         <li class="nav-item active d-flex flex-column justify-content-center">
-          <select #branchSelect (change)='onBranchSelected(branchSelect.value)' class="custom-select custom-select-sm">
-            <option selected value=''>Default Branch</option>
-            <option *ngFor="let branch of branches" value="{{branch.commit.sha}}">{{branch.name}}</option>
+          <select #branchSelect (change)="onBranchSelected(branchSelect.value)" class="custom-select custom-select-sm">
+            <option selected value="">Default Branch</option>
+            <option *ngFor="let branch of branches" value="{{ branch.commit.sha }}">{{ branch.name }}</option>
           </select>
         </li>
       </ul>
