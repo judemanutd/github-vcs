@@ -1,6 +1,6 @@
 import { Controller, Get, Query, HttpException, HttpStatus } from "@nestjs/common";
 import moment from "moment";
-import { ICommitObject } from "./models/ICommitObject";
+// import { ICommitObject } from "./models/ICommitObject";
 import { GithubService } from "./services/github.service";
 
 @Controller()
@@ -51,29 +51,30 @@ export class AppController {
         untilISO,
       );
       // filter out unwanted data
-      const parsedResponse = response.map((item: ICommitObject) => {
-        const {
-          commit: {
-            author,
-            committer,
-            message,
-            verification: { reason, verified },
-          },
-          sha: shaResponse,
-        } = item;
+      // const parsedResponse = response.map((item: ICommitObject) => {
+      //   const {
+      //     commit: {
+      //       author,
+      //       committer,
+      //       message,
+      //       tree,
+      //       verification: { reason, verified },
+      //     },
+      //     sha: shaResponse,
+      //   } = item;
 
-        return {
-          sha: shaResponse,
-          commit: {
-            author,
-            committer,
-            message,
-            verification: { reason, verified },
-          },
-        };
-      });
+      //   return {
+      //     sha: shaResponse,
+      //     commit: {
+      //       author,
+      //       committer,
+      //       message,
+      //       verification: { reason, verified },
+      //     },
+      //   };
+      // });
 
-      return parsedResponse;
+      return response;
     } catch (error) {
       throw error;
     }
