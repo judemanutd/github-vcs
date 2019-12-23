@@ -10,6 +10,9 @@ const routes = {
     if(github.sha!==''){
       request=request+`sha=${github.sha}`;
     }
+    if(github.date!==''){
+      request=request+`until=${github.date}`;
+    }
     return request;
   },
   branches: (github: any) => `https://api.github.com/repos/${github.username}/${github.repo}/branches`,

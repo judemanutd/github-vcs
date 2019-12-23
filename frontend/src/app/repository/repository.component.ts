@@ -23,6 +23,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   commits: any[];
   branches: any[];
   selectedBranchSHA: string;
+  lastDateReceived: string;
   public isMenuCollapsed = true;
 
   constructor(
@@ -41,25 +42,46 @@ export class RepositoryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.selectedBranchSHA = '';
+    this.lastDateReceived = '';
     this.fetchCommits();
   }
 
   ngOnDestroy() {}
 
   public onBranchSelected(sha: string) {
+    this.lastDateReceived='';
     this.selectedBranchSHA = sha;
     this.fetchCommits();
   }
 
-  private fetchCommits(sha: string = '') {
-    this.GithubService.getGithubRepo({ username: this.username, repo: this.repo, sha: this.selectedBranchSHA })
+  public fetchOlderCommits() {
+    this.fetchCommits(false);
+  }
+
+  private fetchCommits(reload: boolean = true) {
+    this.isLoading = true;
+    this.GithubService.getGithubRepo({
+      username: this.username,
+      repo: this.repo,
+      sha: this.selectedBranchSHA,
+      date: this.lastDateReceived
+    })
       .pipe(
         finalize(() => {
           this.isLoading = false;
         })
       )
       .subscribe((commits: any) => {
-        this.commits = commits;
+        const length = commits.length;
+        if (length > 0) {
+          console.log('TCL: RepositoryComponent -> fetchCommits -> commits', commits[length - 1]);
+          this.lastDateReceived = commits[length - 1].commit.committer.date;
+        }
+        if (reload) {
+          this.commits = commits;
+        } else {
+          this.commits = [...this.commits, ...commits];
+        }
       });
 
     this.GithubService.getGithubBranches({ username: this.username, repo: this.repo })
@@ -70,7 +92,6 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       )
       .subscribe((branches: any) => {
         this.branches = branches;
-        console.log('TCL: RepositoryComponent -> fetchCommits ->  this.branches', this.branches);
       });
   }
 }
