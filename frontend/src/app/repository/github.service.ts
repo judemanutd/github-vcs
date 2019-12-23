@@ -5,7 +5,13 @@ import { map, catchError } from 'rxjs/operators';
 
 const routes = {
   // github: (c: any) => `/jokes/random?category=${c.category}`
-  repo: (github: any) => `https://api.github.com/repos/${github.username}/${github.repo}/commits`,
+  repo: (github: any):string => {
+    let request =  `https://api.github.com/repos/${github.username}/${github.repo}/commits?`;
+    if(github.sha!==''){
+      request=request+`sha=${github.sha}`;
+    }
+    return request;
+  },
   branches: (github: any) => `https://api.github.com/repos/${github.username}/${github.repo}/branches`,
   collaborators: (github: any) => `https://api.github.com/repos/${github.username}/${github.repo}/collaborators`
 };
