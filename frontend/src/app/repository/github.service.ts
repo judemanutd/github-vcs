@@ -5,7 +5,9 @@ import { map, catchError } from 'rxjs/operators';
 
 const routes = {
   // github: (c: any) => `/jokes/random?category=${c.category}`
-  github: (github: any) => `https://api.github.com/repos/${github.username}/${github.repo}/commits`
+  repo: (github: any) => `https://api.github.com/repos/${github.username}/${github.repo}/commits`,
+  branches: (github: any) => `https://api.github.com/repos/${github.username}/${github.repo}/branches`,
+  collaborators: (github: any) => `https://api.github.com/repos/${github.username}/${github.repo}/collaborators`
 };
 
 @Injectable({
@@ -17,10 +19,30 @@ export class GithubService {
   getGithubRepo(context: any): Observable<string> {
     return this.httpClient
       .cache()
-      .get(routes.github(context))
+      .get(routes.repo(context))
       .pipe(
         map((body: any) => body),
         catchError(() => of('Error, could not load joke :-('))
       );
   }
+
+  getGithubBranches(context: any): Observable<string> {
+    return this.httpClient
+      .cache()
+      .get(routes.branches(context))
+      .pipe(
+        map((body: any) => body),
+        catchError(() => of('Error, could not load joke :-('))
+      );
+  }
+
+  // getGithubCollaborators(context: any): Observable<string> {
+  //   return this.httpClient
+  //     .cache()
+  //     .get(routes.collaborators(context))
+  //     .pipe(
+  //       map((body: any) => body),
+  //       catchError(() => of('Error, could not load joke :-('))
+  //     );
+  // }
 }

@@ -3,19 +3,19 @@ import { TestBed, async } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { CoreModule, HttpCacheService } from '@app/core';
-import { QuoteService } from './github.service';
+import { GithubService } from './github.service';
 
-describe('QuoteService', () => {
-  let quoteService: QuoteService;
+describe('GithubService', () => {
+  let githubService: GithubService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [CoreModule, HttpClientTestingModule],
-      providers: [HttpCacheService, QuoteService]
+      providers: [HttpCacheService, GithubService]
     });
 
-    quoteService = TestBed.get(QuoteService);
+    githubService = TestBed.get(GithubService);
     httpMock = TestBed.get(HttpTestingController as Type<HttpTestingController>);
 
     const htttpCacheService = TestBed.get(HttpCacheService);
@@ -26,29 +26,29 @@ describe('QuoteService', () => {
     httpMock.verify();
   });
 
-  describe('getRandomQuote', () => {
-    it('should return a random Chuck Norris quote', () => {
+  describe('getGithubRepo', () => {
+    it('should return the repo of the inputted url', () => {
       // Arrange
-      const mockQuote = { value: 'a random quote' };
+      const mockGithub = { value: 'a random github' };
 
       // Act
-      const randomQuoteSubscription = quoteService.getRandomQuote({ category: 'toto' });
+      const randomGithubSubscription = githubService.getGithubRepo({ username: 'GlennFernandes', repo: 'dynasty' });
 
       // Assert
-      randomQuoteSubscription.subscribe((quote: string) => {
-        expect(quote).toEqual(mockQuote.value);
+      randomGithubSubscription.subscribe((github: string) => {
+        expect(github).toEqual(mockGithub.value);
       });
-      httpMock.expectOne({}).flush(mockQuote);
+      httpMock.expectOne({}).flush(mockGithub);
     });
 
     it('should return a string in case of error', () => {
       // Act
-      const randomQuoteSubscription = quoteService.getRandomQuote({ category: 'toto' });
+      const GithubRepo = githubService.getGithubRepo({ username: 'GlennFernandes', repo: 'dynasty' });
 
       // Assert
-      randomQuoteSubscription.subscribe((quote: string) => {
-        expect(typeof quote).toEqual('string');
-        expect(quote).toContain('Error');
+      GithubRepo.subscribe((github: any) => {
+        expect(typeof github).toEqual('object');
+        expect(github).toContain('Error');
       });
       httpMock.expectOne({}).flush(null, {
         status: 500,
