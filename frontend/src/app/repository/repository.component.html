@@ -1,19 +1,72 @@
 <div class="repository-container">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+    <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+      &#9776;
+    </button>
+
+    <!-- Step 2: Add the ngbCollapse directive to the element below. -->
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+      <ul class="navbar-nav w-100 d-flex justify-content-lg-between">
+        <li class="nav-item active d-flex  flex-column justify-content-center">
+          <a class="d-flex navbar-brand" target="_blank" href="https://github.com/{{ username }}/{{ repo }}">
+            <i class="fab fa-2x fa-github"></i>
+            <span class="d-flex flex-column justify-content-center">
+              <h5 class="text-light text-center m-0">/{{ username }}/{{ repo }}</h5>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item active d-flex flex-column justify-content-center">
+          <!-- Step 4: Close the menu when a link is clicked. -->
+          <a [routerLink]="['/dashboard']" (click)="isMenuCollapsed = true" class="btn btn-success">
+            <span>Back</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="repository-box">
     <div class="container">
-      <div class="card col-md-6 mt-3 mx-auto">
-        <div class="card-body">
-          <h4 class="card-title text-center">
-            <i class="fab fa-3x fa-github"></i>
-          </h4>
-          <h5 class="text-dark text-center">{{ username }}/{{ repo }}</h5>
-          <div class="d-flex justify-content-center">
-            <a [routerLink]="['/dashboard']" class="btn btn-success">
-              <span>Back</span>
-            </a>
-          </div>
-        </div>
-      </div>
+      <ngb-accordion #a="ngbAccordion">
+        <ngb-panel *ngFor="let commit of commits" id="{{ commit.sha }}">
+          <ng-template ngbPanelHeader>
+            <button class="commit__container" ngbPanelToggle>
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="commit__content">
+                  <div class="author__avatar__container">
+                    <img
+                      placement="right"
+                      ngbTooltip="{{ commit.commit.author.name }}"
+                      src="{{ commit.author.avatar_url }}"
+                      class="author__avatar"
+                    />
+                  </div>
+                  <div class="w-100 ml-3 d-flex flex-column">
+                    <h5 class="m-0 commit__message text-left">{{ commit.commit.message }}</h5>
+                    <p class="m-0 text-left">{{ commit.commit.committer.date | date: 'medium' }}</p>
+                  </div>
+                </div>
+                <button
+                  *ngIf="commit.commit.verification.verified"
+                  ngbPanelToggle
+                  class="btn btn-link p-0 commit__verified"
+                >
+                  <i placement="left" ngbTooltip="Verified" class="fas fa-2x fa-check-circle"></i>
+                </button>
+              </div>
+            </button>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+            officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
+            wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
+            excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
+            you probably haven't heard of them accusamus labore sustainable VHS.
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
     </div>
   </div>
 </div>
