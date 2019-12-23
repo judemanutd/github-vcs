@@ -3,20 +3,24 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
+// const apiRoute = 'https://api.github.com/repos';
+const githubApiRoute = 'https://api.github.com/repos';
+const apiRoute = 'http://localhost:3000';
+
 const routes = {
   // github: (c: any) => `/jokes/random?category=${c.category}`
   repo: (github: any): string => {
-    let request = `https://api.github.com/repos/${github.username}/${github.repo}/commits?`;
+    let request = `${apiRoute}?username=${github.username}&repoName=${github.repo}`;
     if (github.sha !== '') {
-      request = request + `sha=${github.sha}`;
+      request = request + `&sha=${github.sha}`;
     }
-    if(github.date!==''){
-      request=request+`until=${github.date}`;
+    if (github.date !== '') {
+      request = request + `&until=${github.date}`;
     }
     return request;
   },
-  branches: (github: any) => `https://api.github.com/repos/${github.username}/${github.repo}/branches`,
-  collaborators: (github: any) => `https://api.github.com/repos/${github.username}/${github.repo}/collaborators`
+  branches: (github: any) => `${githubApiRoute}/${github.username}/${github.repo}/branches`,
+  collaborators: (github: any) => `${githubApiRoute}/${github.username}/${github.repo}/collaborators`
 };
 
 @Injectable({

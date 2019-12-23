@@ -41,11 +41,18 @@
                 <div class="commit__content">
                   <div class="author__avatar__container">
                     <img
+                      *ngIf="commit.author"
                       placement="right"
                       ngbTooltip="{{ commit.commit.author.name }}"
-                      src="{{ commit.author.avatar_url }}"
+                      src="{{ commit.author ? commit.author.avatar_url : '' }}"
                       class="author__avatar"
                     />
+                    <i
+                      *ngIf="commit.author === null"
+                      placement="right"
+                      ngbTooltip="{{ commit.commit.author.name }}"
+                      class="fab fa-3x fa-github text-muted"
+                    ></i>
                   </div>
                   <div class="w-100 ml-3 d-flex flex-column">
                     <h5 class="m-0 commit__message text-left">{{ commit.commit.message }}</h5>
@@ -63,25 +70,23 @@
             </button>
           </ng-template>
           <ng-template ngbPanelContent>
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-            officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
-            wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
-            excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
-            you probably haven't heard of them accusamus labore sustainable VHS.
+            <p>
+              {{ commit.commit.message }}
+            </p>
+            <a href="{{ commit.commit.tree.url }}" target="_blank" class="btn btn-success">
+              <span>Browse Files</span>
+            </a>
           </ng-template>
         </ngb-panel>
       </ngb-accordion>
       <div class="w-100 d-flex justify-content-center">
         <div class="col-sm-12 col-md-6 col-lg-4">
-          <button (click)='fetchOlderCommits()' class="btn btn-success w-100">
+          <button (click)="fetchOlderCommits()" class="btn btn-success w-100">
             <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
             <span translate>Show Older</span>
           </button>
         </div>
       </div>
-      
-      
     </div>
   </div>
 </div>

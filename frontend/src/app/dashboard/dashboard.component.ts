@@ -56,8 +56,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private createForm() {
     this.dashboardForm = this.formBuilder.group({
-      url: ['https://github.com/GlennFernandes/dynasty', Validators.required]
-      // url: ['https://github.com/judemanutd/github-vcs', Validators.required]
+      // url: ['https://github.com/GlennFernandes/dynasty', Validators.required]
+      url: ['https://github.com/judemanutd/github-vcs', Validators.required]
     });
   }
 }

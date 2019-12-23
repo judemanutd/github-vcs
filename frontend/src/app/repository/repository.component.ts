@@ -49,7 +49,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
 
   public onBranchSelected(sha: string) {
-    this.lastDateReceived='';
+    this.lastDateReceived = '';
     this.selectedBranchSHA = sha;
     this.fetchCommits();
   }
@@ -72,10 +72,13 @@ export class RepositoryComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((commits: any) => {
+        console.log('TCL: RepositoryComponent -> fetchCommits -> commits', commits);
+
         const length = commits.length;
         if (length > 0) {
-          console.log('TCL: RepositoryComponent -> fetchCommits -> commits', commits[length - 1]);
-          this.lastDateReceived = commits[length - 1].commit.committer.date;
+          this.lastDateReceived = new Date(
+            new Date(commits[length - 1].commit.committer.date).getTime() - 1
+          ).toISOString();
         }
         if (reload) {
           this.commits = commits;
