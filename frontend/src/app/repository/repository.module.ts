@@ -10,6 +10,6 @@ import { GithubService } from './github.service';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, TranslateModule, NgbModule, RepositoryRoutingModule],
-  declarations: [RepositoryComponent]
+  declarations: [RepositoryComponent],
 })
 export class RepositoryModule {}

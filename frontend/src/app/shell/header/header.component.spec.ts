@@ -18,8 +18,8 @@ describe('HeaderComponent', () => {
       declarations: [HeaderComponent],
       providers: [
         { provide: AuthenticationService, useClass: MockAuthenticationService },
-        { provide: CredentialsService, useClass: MockCredentialsService }
-      ]
+        { provide: CredentialsService, useClass: MockCredentialsService },
+      ],
     }).compileComponents();
   }));
 

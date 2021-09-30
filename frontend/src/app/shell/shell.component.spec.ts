@@ -19,9 +19,9 @@ describe('ShellComponent', () => {
       imports: [RouterTestingModule, TranslateModule.forRoot(), NgbModule, CoreModule],
       providers: [
         { provide: AuthenticationService, useClass: MockAuthenticationService },
-        { provide: CredentialsService, useClass: MockCredentialsService }
+        { provide: CredentialsService, useClass: MockCredentialsService },
       ],
-      declarations: [HeaderComponent, ShellComponent]
+      declarations: [HeaderComponent, ShellComponent],
     }).compileComponents();
   }));
 

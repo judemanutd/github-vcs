@@ -6,7 +6,7 @@ import { finalize } from 'rxjs/operators';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   error: string | undefined;
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private createForm() {
     this.dashboardForm = this.formBuilder.group({
       // url: ['https://github.com/GlennFernandes/dynasty', Validators.required]
-      url: ['https://github.com/judemanutd/github-vcs', Validators.required]
+      url: ['https://github.com/judemanutd/github-vcs', Validators.required],
     });
   }
 }

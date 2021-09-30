@@ -1,9 +1,7 @@
 <div class="repository__container">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
     <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
-    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
-      &#9776;
-    </button>
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
 
     <!-- Step 2: Add the ngbCollapse directive to the element below. -->
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
@@ -12,7 +10,7 @@
           <a [routerLink]="['/dashboard']" (click)="isMenuCollapsed = true" class="text-light repository__back-button">
             <i class="fas fa-2x fa-chevron-left"></i>
           </a>
-          <span class="ml-3 d-flex  flex-column justify-content-center">
+          <span class="ml-3 d-flex flex-column justify-content-center">
             <a class="d-flex navbar-brand" target="_blank" href="https://github.com/{{ username }}/{{ repo }}">
               <i class="fab fa-2x fa-github"></i>
               <span class="d-flex flex-column justify-content-center">
@@ -71,7 +69,7 @@
           </ng-template>
           <ng-template ngbPanelContent>
             <div class="commit__messages col-12 mb-3">
-              <span style="white-space: pre-line;">
+              <span style="white-space: pre-line">
                 {{ commit.commit.message }}
               </span>
             </div>

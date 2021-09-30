@@ -19,12 +19,12 @@ const routes = {
     }
     return request;
   },
-  branches: (github: any) => `${apiRoute}/${github.username}/${github.repo}/branches`
+  branches: (github: any) => `${apiRoute}/${github.username}/${github.repo}/branches`,
   // collaborators: (github: any) => `${githubApiRoute}/${github.username}/${github.repo}/collaborators`
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GithubService {
   constructor(private httpClient: HttpClient) {}

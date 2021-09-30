@@ -24,10 +24,10 @@ import { AppRoutingModule } from './app-routing.module';
     CoreModule,
     DashboardModule,
     RepositoryModule,
-    AppRoutingModule // must be imported as the last module as it contains the fallback route
+    AppRoutingModule, // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

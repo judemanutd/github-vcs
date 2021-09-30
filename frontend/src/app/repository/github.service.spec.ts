@@ -12,7 +12,7 @@ describe('GithubService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [CoreModule, HttpClientTestingModule],
-      providers: [HttpCacheService, GithubService]
+      providers: [HttpCacheService, GithubService],
     });
 
     githubService = TestBed.get(GithubService);
@@ -52,7 +52,7 @@ describe('GithubService', () => {
       });
       httpMock.expectOne({}).flush(null, {
         status: 500,
-        statusText: 'error'
+        statusText: 'error',
       });
     });
   });
