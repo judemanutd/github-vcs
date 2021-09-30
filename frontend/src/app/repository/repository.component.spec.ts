@@ -14,7 +14,7 @@ describe('RepositoryComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [NgbModule, RouterTestingModule, TranslateModule.forRoot(), ReactiveFormsModule, CoreModule],
-      declarations: [RepositoryComponent]
+      declarations: [RepositoryComponent],
     }).compileComponents();
   }));
 

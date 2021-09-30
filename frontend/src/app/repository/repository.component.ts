@@ -8,7 +8,7 @@ import { GithubService } from './github.service';
 @Component({
   selector: 'app-repository',
   templateUrl: './repository.component.html',
-  styleUrls: ['./repository.component.scss']
+  styleUrls: ['./repository.component.scss'],
 })
 export class RepositoryComponent implements OnInit, OnDestroy {
   error: string | undefined;
@@ -22,7 +22,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   public isMenuCollapsed = true;
 
   constructor(private router: Router, private route: ActivatedRoute, private GithubService: GithubService) {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.username = params.username;
       this.repo = params.repo;
     });
@@ -52,7 +52,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       username: this.username,
       repo: this.repo,
       sha: this.selectedBranchSHA,
-      date: this.lastDateReceived
+      date: this.lastDateReceived,
     })
       .pipe(
         finalize(() => {

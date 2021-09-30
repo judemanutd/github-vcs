@@ -9,6 +9,6 @@ import { DashboardComponent } from './dashboard.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, TranslateModule, NgbModule, DashboardRoutingModule],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent],
 })
 export class DashboardModule {}
