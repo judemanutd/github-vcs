@@ -23,7 +23,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "helmet": "^3.21.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.8",
